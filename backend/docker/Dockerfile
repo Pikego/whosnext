@@ -2,6 +2,8 @@ FROM node:22-alpine AS base
 
 WORKDIR /app
 
+RUN npm install --global fastify-cli
+
 COPY package.json package-lock.json ./
 
 FROM base AS dev
