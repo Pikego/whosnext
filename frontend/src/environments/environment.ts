@@ -1,4 +1,4 @@
 export const environment = {
-  api: 'http://localhost:3001',
-  ws: 'ws://localhost:3001/ws',
+  api: 'https://api.whosnext.app/api',
+  ws: 'wss://api.whosnext.app/ws',
 };
