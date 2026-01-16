@@ -1,71 +1,22 @@
-:host {
-  display: block;
-  min-height: 100vh;
-  background: var(--tui-background-neutral-1);
+.container {
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
 }
-
-.container {
-  max-width: 480px;
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+tui-textfield, button {
   width: 100%;
-  text-align: center;
+  margin-bottom: 1rem;
 }
-
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--tui-text-01);
-}
-
-.subtitle {
-  color: var(--tui-text-02);
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-}
-
-.card {
-  background: #fff;
-  padding: 2rem;
-  border-radius: var(--tui-radius-l);
-  box-shadow: var(--tui-shadow-navigation);
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-  text-align: left;
-}
-
-.create-button {
-  width: 100%;
-}
-
-.success-message {
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--tui-line-stroke);
-  animation: fade-in 0.3s ease;
-
-  p {
-    color: var(--tui-success-fill);
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-
-  a {
-    width: 100%;
-  }
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.join-room {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
 }
