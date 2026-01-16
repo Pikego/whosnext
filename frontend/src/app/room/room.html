@@ -1,0 +1,40 @@
+<div class="room-container">
+  <h1>Room: {{ roomId() }}</h1>
+
+  <div class="users-list">
+    <h2>Users</h2>
+    <ul>
+      @for (user of users(); track user.id) {
+      <li [class.vacation]="user.isVacation">
+        {{ user.name }}
+        @if (user.isVacation) { (Na urlopie) }
+        <button (click)="toggleVacation(user)" [disabled]="isLotteryRunning()">
+          {{ user.isVacation ? 'Wróć' : 'Urlop' }}
+        </button>
+        <button (click)="toggleWinner(user)" [disabled]="isLotteryRunning()">
+          {{ user.hasWon ? 'Unmark Win' : 'Mark Win' }}
+        </button>
+        <button (click)="removeUser(user.id)" [disabled]="isLotteryRunning()">Delete</button>
+      </li>
+      }
+    </ul>
+  </div>
+
+  <div class="lottery-section">
+    <button (click)="startLottery()" [disabled]="isLotteryRunning() || users().length === 0">
+      Losuj
+    </button>
+
+    @if (currentlyDisplayedName()) {
+    <div class="lottery-display">
+      <h3>@if (isLotteryRunning()) { Losowanie... } @else { Zwycięzca: }</h3>
+      <div class="result-name">{{ currentlyDisplayedName() }}</div>
+    </div>
+    }
+  </div>
+
+  <div class="add-user-form">
+    <input type="text" [formControl]="nameControl" placeholder="Enter nickname" />
+    <button (click)="addUser()" [disabled]="nameControl.invalid">Add User</button>
+  </div>
+</div>

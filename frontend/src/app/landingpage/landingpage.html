@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Who's Next?</h1>
+  <p class="subtitle">Create a room to start voting!</p>
+
+  <div class="card">
+    <tui-error [error]="errorMessage()" />
+
+    <div class="form-group">
+      <tui-textfield>
+        Room Name
+        <input tuiTextfield type="text" [formControl]="nameControl" />
+      </tui-textfield>
+    </div>
+
+    <button
+      tuiButton
+      type="button"
+      size="l"
+      [iconStart]="isLoading() ? '@tui.loader' : ''"
+      (click)="createRoom()"
+      class="create-button"
+    >
+      Create Room
+    </button>
+
+    @if (roomId(); as id) {
+    <div class="success-message">
+      <p>Room created!</p>
+      <a tuiButton appearance="outline" [routerLink]="['/room', id]">Join Room {{ id }}</a>
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,19 @@
+{
+  "scripts": {
+    "test": "node --test test/**/*.test.js",
+    "start": "fastify start -a 0.0.0.0 -l info src/index.js",
+    "dev": "fastify start -w -l info -P src/index.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.2.0",
+    "@fastify/mysql": "^5.0.2",
+    "@fastify/websocket": "^11.2.0",
+    "fastify": "^5.6.2",
+    "mysql2": "^3.16.0",
+    "nanoid": "^5.1.6",
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "fastify-cli": "^7.4.1"
+  }
+}

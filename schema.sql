@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS members (
     room_id INT NOT NULL,
     nickname VARCHAR(255) NOT NULL,
     is_vacation BOOLEAN DEFAULT FALSE COMMENT 'Persistent status for long-term absence',
+    has_won BOOLEAN DEFAULT FALSE COMMENT 'Tracks if user has won in the current cycle',
     is_available BOOLEAN DEFAULT TRUE COMMENT 'Transient status for daily availability',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE
