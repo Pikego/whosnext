@@ -4,7 +4,7 @@ services:
       - .env
     build:
       context: ./backend
-      dockerfile: backend/docker/Dockerfile
+      dockerfile: docker/Dockerfile
       target: dev
     restart: unless-stopped
     depends_on:

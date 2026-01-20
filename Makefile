@@ -6,8 +6,8 @@ build-frontend:
 build-backend:
 	docker build -t whosnext-backend -f backend/docker/Dockerfile backend
 
-up:
+start:
 	docker compose up
 
-down:
+stop:
 	docker compose down

@@ -1,40 +1,65 @@
 <div class="room-container">
-  <h1>Room: {{ roomId() }}</h1>
-
-  <div class="users-list">
-    <h2>Users</h2>
-    <ul>
-      @for (user of users(); track user.id) {
-      <li [class.vacation]="user.isVacation">
-        {{ user.name }}
-        @if (user.isVacation) { (Na urlopie) }
-        <button (click)="toggleVacation(user)" [disabled]="isLotteryRunning()">
-          {{ user.isVacation ? 'Wróć' : 'Urlop' }}
-        </button>
-        <button (click)="toggleWinner(user)" [disabled]="isLotteryRunning()">
-          {{ user.hasWon ? 'Unmark Win' : 'Mark Win' }}
-        </button>
-        <button (click)="removeUser(user.id)" [disabled]="isLotteryRunning()">Delete</button>
-      </li>
-      }
-    </ul>
-  </div>
-
-  <div class="lottery-section">
-    <button (click)="startLottery()" [disabled]="isLotteryRunning() || users().length === 0">
-      Losuj
-    </button>
-
-    @if (currentlyDisplayedName()) {
-    <div class="lottery-display">
-      <h3>@if (isLotteryRunning()) { Losowanie... } @else { Zwycięzca: }</h3>
-      <div class="result-name">{{ currentlyDisplayedName() }}</div>
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Users ({{ users().length }})</h2>
+      <div class="room-id">Room: {{ roomId() }}</div>
     </div>
-    }
-  </div>
 
-  <div class="add-user-form">
-    <input type="text" [formControl]="nameControl" placeholder="Enter nickname" />
-    <button (click)="addUser()" [disabled]="nameControl.invalid">Add User</button>
-  </div>
+    <div class="users-list">
+      <ul>
+        @for (user of users(); track user.id) {
+        <li [class.vacation]="user.isVacation" [class.winner]="user.hasWon">
+          <div class="user-info">
+            <span class="user-name">{{ user.name }}</span>
+            @if (user.isVacation) { <span class="badge vacation-badge">Urlop</span> }
+            @if (user.hasWon) { <span class="badge winner-badge">Wygrał</span> }
+          </div>
+          <div class="user-actions">
+            <button tuiButton appearance="flat" size="s" (click)="toggleVacation(user)" [disabled]="isLotteryRunning()"
+              class="icon-btn" [title]="user.isVacation ? 'Przywróć' : 'Wyślij na urlop'">
+              {{ user.isVacation ? '☀️' : '🏖️' }}
+            </button>
+            <button tuiButton appearance="flat" size="s" (click)="toggleWinner(user)" [disabled]="isLotteryRunning()"
+              class="icon-btn" [title]="user.hasWon ? 'Cofnij wygraną' : 'Oznacz jako wygranego'">
+              {{ user.hasWon ? '❌' : '🏆' }}
+            </button>
+            <button tuiButton appearance="flat" size="s" (click)="removeUser(user.id)" [disabled]="isLotteryRunning()"
+              class="icon-btn delete-btn" title="Usuń">🗑️</button>
+          </div>
+        </li>
+        }
+      </ul>
+    </div>
+
+    <div class="add-user-form">
+      <input type="text" [formControl]="nameControl" placeholder="Enter nickname" (keydown.enter)="addUser()" />
+      <button tuiButton size="m" (click)="addUser()" [disabled]="nameControl.invalid">Add</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="lottery-arena">
+      @if (!isLotteryRunning() && !currentlyDisplayedName() && !winner()) {
+      <button tuiButton appearance="primary" size="xl" class="draw-button" (click)="startLottery()"
+        [disabled]="users().length === 0">
+        LOSUJ
+      </button>
+      }
+
+      @if (isLotteryRunning()) {
+      <div class="drawing-animation">
+        <h3>Losowanie...</h3>
+        <div class="rolling-name">{{ currentlyDisplayedName() }}</div>
+      </div>
+      }
+
+      @if (!isLotteryRunning() && winner()) {
+      <div class="winner-display">
+        <h3>Zwycięzca!</h3>
+        <div class="winner-name">{{ winner()?.name }}</div>
+        <button tuiButton appearance="outline" class="reset-button" (click)="startLottery()">Losuj ponownie</button>
+      </div>
+      }
+    </div>
+  </main>
 </div>

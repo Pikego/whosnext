@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+    --primary-color: #3b82f6;
+    --success-color: #22c55e;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+
+    /* Default Light Mode */
+    --bg-color: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f1f5f9;
+    --text-color: #0f172a;
+    --text-secondary: #475569;
+    --border-color: #e2e8f0;
+    --sidebar-bg: #ffffff;
+    --item-hover-bg: #f1f5f9;
+}
+
+[data-tui-theme="dark"] {
+    /* Dark Mode Overrides */
+    --bg-color: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-color: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --border-color: #334155;
+    --sidebar-bg: #1e293b;
+    --item-hover-bg: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}

@@ -1,4 +1,5 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { TuiButton } from '@taiga-ui/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { WsService } from '../common/ws.service';
@@ -12,9 +13,10 @@ interface User {
 
 @Component({
   selector: 'app-room',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TuiButton],
   templateUrl: './room.html',
   styleUrl: './room.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Room implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);

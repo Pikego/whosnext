@@ -1,3 +1,6 @@
 <tui-root>
+  <button tuiButton type="button" appearance="outline" size="m" (click)="themeService.toggle()" class="theme-toggle">
+    {{ themeService.current() === 'light' ? 'Dark' : 'Light' }} Mode
+  </button>
   <router-outlet />
 </tui-root>
