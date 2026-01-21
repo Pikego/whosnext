@@ -1,23 +1,61 @@
 // Variables
 $sidebar-width: 350px;
-// Colors are now handled by CSS variables in styles.scss
-// $primary-color, $success-color, etc are now var(--primary-color), etc.
+
+$primary-color: #3b82f6;
+$success-color: #22c55e;
+$danger-color: #ef4444;
+$warning-color: #f59e0b;
+
+// Light Mode
+$bg-color-light: #f8fafc;
+$bg-secondary-light: #ffffff;
+$bg-tertiary-light: #f1f5f9;
+$text-color-light: #0f172a;
+$text-secondary-light: #475569;
+$border-color-light: #e2e8f0;
+$sidebar-bg-light: #ffffff;
+$item-hover-bg-light: #f1f5f9;
+
+// Dark Mode
+$bg-color-dark: #0f172a;
+$bg-secondary-dark: #1e293b;
+$bg-tertiary-dark: #334155;
+$text-color-dark: #f8fafc;
+$text-secondary-dark: #cbd5e1;
+$border-color-dark: #334155;
+$sidebar-bg-dark: #1e293b;
+$item-hover-bg-dark: rgba(255, 255, 255, 0.05);
+
+@mixin dark-mode {
+  :host-context([data-tui-theme='dark']) & {
+    @content;
+  }
+}
 
 .room-container {
   display: flex;
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: $bg-color-light;
+  color: $text-color-light;
+
+  @include dark-mode {
+    background-color: $bg-color-dark;
+    color: $text-color-dark;
+  }
 }
 
 // Sidebar
 .sidebar {
   width: $sidebar-width;
-  background-color: var(--sidebar-bg);
-  border-right: 1px solid var(--border-color);
+  background-color: $sidebar-bg-light;
+  border-right: 1px solid $border-color-light;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -25,29 +63,48 @@ $sidebar-width: 350px;
   /* Lighter shadow for light mode, maybe variable later? */
   z-index: 10;
 
+  @include dark-mode {
+    background-color: $sidebar-bg-dark;
+    border-right-color: $border-color-dark;
+  }
+
   .sidebar-header {
     padding: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    background-color: var(--sidebar-bg);
+    border-bottom: 1px solid $border-color-light;
+    background-color: $sidebar-bg-light;
     /* Using solid color to avoid complexity with rgba/blur on var */
     /* backdrop-filter: blur(10px); */
+
+    @include dark-mode {
+      border-bottom-color: $border-color-dark;
+      background-color: $sidebar-bg-dark;
+    }
 
     h2 {
       margin: 0;
       font-size: 1.5rem;
       font-weight: 700;
-      color: var(--text-color);
+      color: $text-color-light;
+
+      @include dark-mode {
+        color: $text-color-dark;
+      }
     }
 
     .room-id {
       margin-top: 0.5rem;
       font-size: 0.875rem;
-      color: var(--text-secondary);
+      color: $text-secondary-light;
       font-family: monospace;
-      background: var(--item-hover-bg);
+      background: $item-hover-bg-light;
       padding: 0.25rem 0.5rem;
       border-radius: 4px;
       display: inline-block;
+
+      @include dark-mode {
+        color: $text-secondary-dark;
+        background: $item-hover-bg-dark;
+      }
     }
   }
 
@@ -66,8 +123,12 @@ $sidebar-width: 350px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: var(--border-color);
+      background-color: $border-color-light;
       border-radius: 3px;
+
+      @include dark-mode {
+        background-color: $border-color-dark;
+      }
     }
 
     ul {
@@ -88,13 +149,21 @@ $sidebar-width: 350px;
       border: 1px solid transparent;
 
       &:hover {
-        background-color: var(--item-hover-bg);
+        background-color: $item-hover-bg-light;
         transform: translateY(-1px);
+
+        @include dark-mode {
+          background-color: $item-hover-bg-dark;
+        }
       }
 
       &.vacation {
         opacity: 0.6;
-        background-color: var(--item-hover-bg); // Use a subtle bg
+        background-color: $item-hover-bg-light; // Use a subtle bg
+
+        @include dark-mode {
+          background-color: $item-hover-bg-dark;
+        }
 
         .user-name {
           text-decoration: line-through;
@@ -102,12 +171,12 @@ $sidebar-width: 350px;
       }
 
       &.winner {
-        border-color: var(--success-color);
-        background-color: color-mix(in srgb, var(--success-color), transparent 95%);
-        box-shadow: inset 0 0 12px color-mix(in srgb, var(--success-color), transparent 90%);
+        border-color: $success-color;
+        background-color: color-mix(in srgb, $success-color, transparent 95%);
+        box-shadow: inset 0 0 12px color-mix(in srgb, $success-color, transparent 90%);
 
         .user-name {
-          color: var(--success-color);
+          color: $success-color;
           font-weight: 700;
         }
       }
@@ -136,13 +205,13 @@ $sidebar-width: 350px;
           letter-spacing: 0.05em;
 
           &.vacation-badge {
-            background-color: color-mix(in srgb, var(--warning-color), transparent 80%);
-            color: var(--warning-color);
+            background-color: color-mix(in srgb, $warning-color, transparent 80%);
+            color: $warning-color;
           }
 
           &.winner-badge {
-            background-color: color-mix(in srgb, var(--success-color), transparent 80%);
-            color: var(--success-color);
+            background-color: color-mix(in srgb, $success-color, transparent 80%);
+            color: $success-color;
           }
         }
       }
@@ -162,24 +231,35 @@ $sidebar-width: 350px;
 
   .add-user-form {
     padding: 1.5rem;
-    border-top: 1px solid var(--border-color);
-    background-color: var(--sidebar-bg);
+    border-top: 1px solid $border-color-light;
+    background-color: $sidebar-bg-light;
     display: flex;
     gap: 0.5rem;
 
+    @include dark-mode {
+      border-top-color: $border-color-dark;
+      background-color: $sidebar-bg-dark;
+    }
+
     input {
       flex: 1;
-      background-color: var(--bg-color);
-      border: 1px solid var(--border-color);
+      background-color: $bg-color-light;
+      border: 1px solid $border-color-light;
       border-radius: 6px;
       padding: 0.75rem;
-      color: var(--text-color);
+      color: $text-color-light;
       font-size: 0.9rem;
       transition: border-color 0.2s;
 
+      @include dark-mode {
+        background-color: $bg-color-dark;
+        border-color: $border-color-dark;
+        color: $text-color-dark;
+      }
+
       &:focus {
         outline: none;
-        border-color: var(--primary-color);
+        border-color: $primary-color;
       }
     }
   }
@@ -192,9 +272,13 @@ $sidebar-width: 350px;
   justify-content: center;
   align-items: center;
   // background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-  background-color: var(--bg-color); // Simplifying background for thematic consistency
+  background-color: $bg-color-light; // Simplifying background for thematic consistency
   position: relative;
   overflow: hidden;
+
+  @include dark-mode {
+    background-color: $bg-color-dark;
+  }
 
   // Background decoration
   &::before {
@@ -203,13 +287,19 @@ $sidebar-width: 350px;
     width: 100%;
     height: 90%;
     background-image:
-      linear-gradient(var(--border-color) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+      linear-gradient($border-color-light 1px, transparent 1px),
+      linear-gradient(90deg, $border-color-light 1px, transparent 1px);
     background-size: 50px 50px;
     opacity: 0.3;
     pointer-events: none;
     -webkit-mask-image: linear-gradient(to bottom, black, transparent);
     mask-image: linear-gradient(to bottom, black, transparent);
+
+    @include dark-mode {
+      background-image:
+        linear-gradient($border-color-dark 1px, transparent 1px),
+        linear-gradient(90deg, $border-color-dark 1px, transparent 1px);
+    }
   }
 
   .lottery-arena {
@@ -222,22 +312,30 @@ $sidebar-width: 350px;
 
     .drawing-animation {
       h3 {
-        color: var(--text-secondary);
+        color: $text-secondary-light;
         font-size: 1.5rem;
         margin-bottom: 2rem;
         text-transform: uppercase;
         letter-spacing: 0.2em;
+
+        @include dark-mode {
+          color: $text-secondary-dark;
+        }
       }
 
       .rolling-name {
         font-size: 5rem;
         font-weight: 900;
         // background: linear-gradient(to right, #fff, #94a3b8);
-        color: var(--text-color);
+        color: $text-color-light;
         /* background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent; */
         animation: pulse 0.1s infinite;
+
+        @include dark-mode {
+          color: $text-color-dark;
+        }
       }
     }
 
@@ -245,7 +343,7 @@ $sidebar-width: 350px;
       animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
       h3 {
-        color: var(--success-color);
+        color: $success-color;
         font-size: 1.5rem;
         margin-bottom: 1rem;
         text-transform: uppercase;
@@ -255,11 +353,15 @@ $sidebar-width: 350px;
       .winner-name {
         font-size: 6rem;
         font-weight: 900;
-        color: var(--text-color);
+        color: $text-color-light;
         text-shadow:
-          0 0 20px color-mix(in srgb, var(--success-color), transparent 50%),
+          0 0 20px color-mix(in srgb, $success-color, transparent 50%),
           0 4px 10px rgba(0, 0, 0, 0.1);
         margin-bottom: 2rem;
+
+        @include dark-mode {
+          color: $text-color-dark;
+        }
       }
     }
   }

@@ -33,7 +33,11 @@ An application designed to randomly select the person responsible for leading th
    ```bash
    docker-compose up -d
    ```
-3. Access the application in your browser.
+3. Go to `frontend` folder and run:
+   ```bash
+   npm start
+   ```
+4. Access the application in your browser.
 
 ### Usage
 

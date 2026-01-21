@@ -1,6 +1,17 @@
-<tui-root>
-  <button tuiButton type="button" appearance="outline" size="m" (click)="themeService.toggle()" class="theme-toggle">
+<tui-root [attr.tuiTheme]="themeService.current()">
+  <button
+    tuiButton
+    type="button"
+    appearance="outline"
+    size="m"
+    (click)="themeService.toggle()"
+    class="theme-toggle"
+  >
     {{ themeService.current() === 'light' ? 'Dark' : 'Light' }} Mode
   </button>
   <router-outlet />
+  <footer class="app-footer">
+    <a href="https://antigravity.google/" target="_blank">Made with Antigravity</a> |
+    <a href="https://github.com/Pikego/whosnext" target="_blank">GitHub</a>
+  </footer>
 </tui-root>

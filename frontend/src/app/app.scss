@@ -1,6 +1,25 @@
 .theme-toggle {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 100;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+}
+
+.app-footer {
+  position: fixed;
+  bottom: 1rem;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  width: 100%;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }

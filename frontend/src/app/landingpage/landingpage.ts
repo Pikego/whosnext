@@ -5,9 +5,10 @@ import { catchError, finalize, of, tap } from 'rxjs';
 
 import { TuiAppearance, TuiButton, TuiError, TuiTextfield, TuiTitle } from '@taiga-ui/core';
 import { TuiCardLarge, TuiHeader } from '@taiga-ui/layout';
-import { TuiAutoFocus } from '@taiga-ui/cdk';
+import { TuiAutoFocus, TuiThemeColorService } from '@taiga-ui/cdk';
 
 import { ApiService } from '../common/api.service';
+import { ThemeService } from '../common/theme.service';
 
 @Component({
   selector: 'app-landingpage',
@@ -30,6 +31,7 @@ import { ApiService } from '../common/api.service';
 })
 export class Landingpage {
   private readonly apiService = inject(ApiService);
+  protected readonly themeService = inject(ThemeService);
 
   protected readonly form = new FormGroup({
     name: new FormControl('', {
@@ -64,7 +66,7 @@ export class Landingpage {
         }),
         finalize(() => {
           this.isLoading.set(false);
-        })
+        }),
       )
       .subscribe();
   }

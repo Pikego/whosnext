@@ -1,36 +1,36 @@
 <div class="container">
   <div tuiAppearance="floating" tuiCardLarge>
     @if (roomId(); as id) {
-    <header tuiHeader="h1">
-      <div tuiTitle>
-        <h1>Room created 🎉</h1>
-        <p class="join-room">
-          <a size="l" tuiButton [routerLink]="['/room', id]">Join now!</a>
-        </p>
-      </div>
-    </header>
-    }@else {
-    <header tuiHeader="h1">
-      <div tuiTitle>
-        <h1>Who's Next?</h1>
-        <p tuiSubtitle>Create a room to start voting!</p>
-      </div>
-    </header>
+      <header tuiHeader="h1">
+        <div tuiTitle>
+          <h1>Room created 🎉</h1>
+          <p class="join-room">
+            <a size="l" tuiButton [routerLink]="['/room', id]">Join now!</a>
+          </p>
+        </div>
+      </header>
+    } @else {
+      <header tuiHeader="h1">
+        <div tuiTitle>
+          <h1>Who's Next?</h1>
+          <p tuiSubtitle>Create a room to start voting!</p>
+        </div>
+      </header>
 
-    <section>
-      <tui-error [error]="errorMessage()" />
+      <section>
+        <tui-error [error]="errorMessage()" />
 
-      <form [formGroup]="form" (ngSubmit)="createRoom()">
-        <tui-textfield>
-          <label tuiLabel>Room Name</label>
-          <input tuiTextfield tuiAutoFocus type="text" formControlName="name" />
-        </tui-textfield>
+        <form [formGroup]="form" (ngSubmit)="createRoom()">
+          <tui-textfield>
+            <label tuiLabel>Room Name</label>
+            <input tuiTextfield tuiAutoFocus type="text" formControlName="name" />
+          </tui-textfield>
 
-        <button tuiButton type="submit" size="l" [iconStart]="isLoading() ? '@tui.loader' : ''">
-          Create Room
-        </button>
-      </form>
-    </section>
+          <button tuiButton type="submit" size="l" [iconStart]="isLoading() ? '@tui.loader' : ''">
+            Create Room
+          </button>
+        </form>
+      </section>
     }
   </div>
 </div>
